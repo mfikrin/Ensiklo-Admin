@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ENSIKLO_ADMIN.Views.NewCategoryPage">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout BackgroundColor="WhiteSmoke">
+                <StackLayout BackgroundColor="WhiteSmoke" Margin="45">
+
+                    <Label Text="Add new category" TextColor="Black" FontSize="35" FontAttributes="Bold" Margin="0, 0, 0, 25"/>
+                    <Grid ColumnDefinitions="200, *">
+                        <Label Text="Category Name" TextColor="Black" FontSize="Medium" Grid.Column="0"/>
+                        <Editor Text="{Binding Cat_name, Mode=TwoWay}" FontSize="Medium" Grid.Column="1" BackgroundColor="WhiteSmoke"/>
+                    </Grid>
+
+                    <StackLayout Orientation="Horizontal" Margin="0, 30, 0, 0">
+                        <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                        <Button Text="Add" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -177,7 +177,7 @@ namespace ENSIKLO_ADMIN.ViewModels
         private async void OnCancel()
         {
             // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync($"//admin/homeAdmin");
+            await Shell.Current.GoToAsync("//admin/homeAdmin");
         }
 
         private async void OnNewCat()

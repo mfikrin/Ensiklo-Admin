@@ -1,9 +1,11 @@
 ﻿using ENSIKLO_ADMIN.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +17,19 @@ namespace ENSIKLO_ADMIN.Views
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            BindingContext = Startup.Resolve<LoginViewModel>();
         }
+
+
+        //protected override async void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    var loggedIn = true;
+        //    if (loggedIn)
+        //    {
+        //        Debug.WriteLine("Sudah pernah login in login page");
+        //        await Shell.Current.GoToAsync("//main");
+        //    }
+        //}
     }
 }

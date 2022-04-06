@@ -11,8 +11,10 @@ namespace ENSIKLO_ADMIN
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Routing.RegisterRoute(nameof(BookDetailPage), typeof(BookDetailPage));
+            Routing.RegisterRoute(nameof(NewBookPage), typeof(NewBookPage));
+            Routing.RegisterRoute(nameof(BooksPage), typeof(BooksPage));
+            Routing.RegisterRoute(nameof(NewCategoryPage), typeof(NewCategoryPage));
         }
 
     }

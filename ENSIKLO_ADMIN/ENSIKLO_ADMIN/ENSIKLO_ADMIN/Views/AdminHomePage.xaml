@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ENSIKLO_ADMIN.Views.AdminHomePage">
+
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout BackgroundColor="WhiteSmoke">
+                <Frame CornerRadius="20" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="Start"
+                       HasShadow="True"
+                       IsClippedToBounds="True"
+                       BackgroundColor="#009BF0"
+                       Margin="10"
+                       Padding="0"
+                    >
+                    <StackLayout HeightRequest="190">
+                        <Label Text="Shortcuts" FontSize="25" FontAttributes="Bold" Margin="40, 40, 0, 0"/>
+                        <Grid Margin="40, 20, 40, 0">
+                            <Button Text="Add new book" Command="{Binding NewBookCommand}" CornerRadius="20" Grid.Column="0" BackgroundColor="White" TextColor="Black" HeightRequest="40" WidthRequest="50"/>
+                            <Button Text="Add new category" Command="{Binding NewCatCommand}" CornerRadius="20" Grid.Column="1" BackgroundColor="White" TextColor="Black" HeightRequest="40" WidthRequest="50"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="20" 
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="Start"
+                       HasShadow="True"
+                       IsClippedToBounds="True"
+                       BackgroundColor="#2DB272"
+                       Margin="10"
+                       Padding="0"
+                    >
+                    <StackLayout HeightRequest="190">
+                        <Label Text="Stats" FontSize="25" FontAttributes="Bold" Margin="40, 40, 0, 0"/>
+                        <Label Margin="40, 0, 0, 0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Total users: " FontAttributes="Bold" FontSize="18"/>
+                                    <Span Text="{Binding UserTotal}" FontSize="18" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Margin="40, 0, 0, 0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Total books: " FontAttributes="Bold" FontSize="18"/>
+                                    <Span Text="{Binding BookTotal}" FontSize="18" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -178,7 +178,7 @@ namespace ENSIKLO_ADMIN.ViewModels
         {
             // This will pop the current page off the navigation stack
             //await Shell.Current.GoToAsync("///homeAdmin");
-            await Shell.Current.GoToAsync("//homeAdmin");
+            await Shell.Current.GoToAsync("//home");
 
         }
 

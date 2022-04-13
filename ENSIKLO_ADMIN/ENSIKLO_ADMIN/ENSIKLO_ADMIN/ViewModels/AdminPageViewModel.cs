@@ -12,7 +12,7 @@ namespace ENSIKLO_ADMIN.ViewModels
 {
     public class AdminPageViewModel : BaseViewModel
     {
-        private readonly IUserService _userService;
+        private readonly IAdminService _adminService;
         private readonly IBookService _bookService;
         private readonly ICatService _catService;
         public int userTotal;
@@ -20,9 +20,9 @@ namespace ENSIKLO_ADMIN.ViewModels
         public int categoryTotal;
 
 
-        public AdminPageViewModel(IUserService userService, IBookService bookService, ICatService catService)
+        public AdminPageViewModel(IAdminService adminService, IBookService bookService, ICatService catService)
         {
-            _userService = userService;
+            _adminService = adminService;
             _bookService = bookService;
             _catService = catService;
             NewCatCommand = new Command(OnNewCat);

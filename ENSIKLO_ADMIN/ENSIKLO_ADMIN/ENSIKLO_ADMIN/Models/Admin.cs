@@ -5,10 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace ENSIKLO_ADMIN.Models
 {
-    public class User
+    public class Admin
     {
-        [JsonPropertyName("id_user")]
-        public Int64 Id{ get; set; }
+        [JsonPropertyName("id_admin")]
+        public int Id { get; set; }
 
         [JsonPropertyName("email")]
         public string Email { get; set; }

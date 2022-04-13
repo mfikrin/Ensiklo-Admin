@@ -1,52 +1,96 @@
 ﻿using ENSIKLO_ADMIN.Services;
+using ENSIKLO_ADMIN.Models;
 using ENSIKLO_ADMIN.Views;
 using System;
+using System.Diagnostics;
+using System.Net;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace ENSIKLO_ADMIN.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private readonly IBookService _bookService; // nanti ganti jadi service buat register dan login
+        private readonly IAdminService _adminService; // nanti ganti jadi service buat register dan login
         public Command LoginCommand { get; }
 
         public Command TappedCommand { get; }
 
-        public LoginViewModel(IBookService bookService)
+        public string email;
+        public string password;
+        public LoginViewModel(IAdminService adminService)
         {
-            _bookService = bookService;
-            LoginCommand = new Command<string>(OnLoginClicked);
+            _adminService = adminService;
+            LoginCommand = new Command(async () => await OnLoginClicked(), ValidateLogin);
 
-            TappedCommand = new Command(onTapped);
+
+            PropertyChanged +=
+            (_, __) => LoginCommand.ChangeCanExecute();
         }
 
-        private async void OnLoginClicked(string role)
+
+        public string Email
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-
-            // NANTI UNCOMMENT INI
-
-            //if (role.Equals("Admin"){
-            //    await Shell.Current.GoToAsync($"//admin/homeAdmin");
-            //}
-            //else if (role.Equals("User"))
-            //{
-            //    await Shell.Current.GoToAsync($"//main/home");
-            //}
-
-
-
-            await Shell.Current.GoToAsync("//admin/homeAdmin");
-            //await Shell.Current.GoToAsync($"//main/home");
-            //await Shell.Current.GoToAsync($"//admin/homeAdmin");
-
+            get => email;
+            set => SetProperty(ref email, value);
         }
 
-        private async void onTapped(object obj)
+        public string Password
         {
-            await Shell.Current.GoToAsync("//register");
+            get => password;
+            set => SetProperty(ref password, value);
+        }
+
+        private async Task OnLoginClicked()
+        {
+            try
+            {
+                Debug.WriteLine(email);
+                Debug.WriteLine(!String.IsNullOrWhiteSpace(email));
+                Debug.WriteLine(password);
+                Debug.WriteLine(!String.IsNullOrWhiteSpace(password));
+                Debug.WriteLine("Doing login");
+                var req = new LoginRequest
+                {
+                    Email = email,
+                    Password = password,
+                };
+
+                string token = await _adminService.LoginAdminAsync(req);
+
+                Debug.WriteLine(token);
+
+                CurrentUser.Token = token;
+
+                Admin gotAdmin = await _adminService.GetCurrentAdmin();
+
+                CurrentUser.Id = gotAdmin.Id;
+                CurrentUser.Email = gotAdmin.Email;
+                CurrentUser.Username = gotAdmin.Username;
+
+                Debug.WriteLine(gotAdmin.Email);
+                Debug.WriteLine("token = " + CurrentUser.Token);
+                Debug.WriteLine("username = " + CurrentUser.Username);
+
+                await Shell.Current.GoToAsync("//main/home");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        //private async void onTapped(object obj)
+        //{
+        //    await Shell.Current.GoToAsync("//register");
+        //}
+        private bool ValidateLogin()
+        {
+            return !String.IsNullOrWhiteSpace(email)
+               && !String.IsNullOrWhiteSpace(password)
+               ;
         }
     }
 }

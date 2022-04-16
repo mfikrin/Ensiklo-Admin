@@ -29,7 +29,6 @@ namespace ENSIKLO_ADMIN.ViewModels
         {
             userTotal = 0;
             bookTotal = 0;
-            //BLOM ADA GETUSERSASYNC PLS HELP
             //var user = await _userService.GetUsersAsync();
             //foreach (var item in user)
             //{

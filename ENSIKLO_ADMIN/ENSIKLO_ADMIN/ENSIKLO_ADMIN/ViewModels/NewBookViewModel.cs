@@ -44,6 +44,8 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         public string keywords;
 
+        public string isbn;
+
         private readonly IBookService _bookService;
 
         private readonly ICatService _catService;
@@ -85,6 +87,7 @@ namespace ENSIKLO_ADMIN.ViewModels
                 && !String.IsNullOrWhiteSpace(category)
                 && !String.IsNullOrWhiteSpace(keywords)
                 ;
+            //isbn kalo ga ada gausah diisi gapapa
             //return true;
         }
 
@@ -170,6 +173,12 @@ namespace ENSIKLO_ADMIN.ViewModels
             set => SetProperty(ref keywords, value);
         }
 
+        public string Isbn
+        {
+            get => isbn;
+            set => SetProperty(ref isbn, value);
+        }
+
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
         public Command NewCatCommand { get; }
@@ -217,7 +226,7 @@ namespace ENSIKLO_ADMIN.ViewModels
                 Debug.WriteLine(added_time);
                 var book = new Book
                 {
-             
+
                     Title = Title,
                     Author = Author,
                     Publisher = Publisher,
@@ -228,7 +237,8 @@ namespace ENSIKLO_ADMIN.ViewModels
                     Url_cover = Url_cover,
                     Category = Category,
                     Added_time = Added_time,
-                    Keywords = Keywords
+                    Keywords = Keywords,
+                    Isbn = Isbn
                 };
 
                 await _bookService.AddItemAsync(book);

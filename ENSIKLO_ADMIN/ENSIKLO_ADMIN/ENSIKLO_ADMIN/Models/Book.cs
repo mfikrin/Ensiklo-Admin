@@ -43,6 +43,9 @@ namespace ENSIKLO_ADMIN.Models
         [JsonPropertyName("keywords")]
         public string Keywords { get; set; }
 
+        [JsonPropertyName("isbn")]
+        public string Isbn { get; set; }
+
 
     }
 }

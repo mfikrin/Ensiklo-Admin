@@ -9,23 +9,69 @@ namespace ENSIKLO_ADMIN.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {
-        private readonly IBookService _bookService; // nanti ganti jadi service buat register dan login
+        private readonly IAdminService _userService;
         public Command LogoutCommand { get; }
+        public string email;
+        public string userName;
+        public Int64 id;
 
-        public ProfileViewModel(IBookService bookService)
+        public Command UpdateProfile { get; }
+
+        public ProfileViewModel(IAdminService userService)
         {
 
-
-            _bookService = bookService;
+            _userService = userService;
 
             LogoutCommand = new Command(OnClickLogout);
+            // UpdateProfile = new Command(UpdateProfileTapped);
 
-            
         }
 
         private async void OnClickLogout(object obj)
         {
             await Shell.Current.GoToAsync($"//login");
         }
+
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+        public string Name
+        {
+            get => userName;
+            set
+            {
+                userName = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+        public async void GetData()
+        {
+            var user = await _userService.GetCurrentAdmin();
+            //var user = new User
+            //{
+            //    Username = "tes nama",
+            //    Email = "tes email",
+            //    Id = 1,
+            //};
+            email = user.Email;
+            userName = user.Username;
+            id = user.Id;
+            // Debug.WriteLine(email);
+            // Debug.WriteLine(userName);
+            Email = email;
+            Name = userName;
+        }
+
+        // private async void UpdateProfileTapped(object obj)
+        // {
+        //     await Shell.Current.GoToAsync(nameof(UpdateProfilePage));
+        // }
     }
 }

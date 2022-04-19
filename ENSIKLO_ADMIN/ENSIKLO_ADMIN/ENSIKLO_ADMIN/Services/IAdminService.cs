@@ -14,6 +14,8 @@ namespace ENSIKLO_ADMIN.Services
         Task<bool> UpdateAdminAsync(Admin item);
         Task<bool> DeleteAdminAsync(Int64 id);
         Task<Admin> GetAdminAsync(Int64 id);
+        Task<NumUsers> GetNumUsersAsync();
+        Task<NumAdmins> GetNumAdminsAsync();
         Task<Admin> GetCurrentAdmin();
         Task<IEnumerable<Admin>> GetAdminsAsync(bool forceRefresh = false);
     }

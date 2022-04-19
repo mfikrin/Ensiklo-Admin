@@ -47,7 +47,8 @@ namespace ENSIKLO_ADMIN
             services.AddTransient<ProfileViewModel>();
             services.AddTransient<NewCategoryViewModel>();
             services.AddTransient<AdminPageViewModel>();
-
+            services.AddTransient<SearchResultViewModel>();
+            
             serviceProvider = services.BuildServiceProvider();
         }
 

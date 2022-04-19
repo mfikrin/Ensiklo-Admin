@@ -40,9 +40,11 @@ namespace ENSIKLO_ADMIN.ViewModels
             //{
             //    userTotal += 1;
             //}
+            var users = await _adminService.GetNumUsersAsync();
             var books = await _bookService.GetItemsAsync();
             var categories = await _catService.GetCatsAsync();
 
+            userTotal = users.num_users;
             bookTotal = books.Count();
             categoryTotal = categories.Count();
 

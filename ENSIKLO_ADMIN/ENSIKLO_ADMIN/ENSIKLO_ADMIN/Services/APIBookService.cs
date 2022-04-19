@@ -74,5 +74,16 @@ namespace ENSIKLO_ADMIN.Services
 
             return await Task.FromResult(true);
         }
+
+        public async Task<IEnumerable<Book>> SearchBooks(string query)
+        {
+            var response = await _httpClient.GetAsync($"Book/search?title={query}");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseAsString = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<IEnumerable<Book>>(responseAsString);
+        }
     }
 }

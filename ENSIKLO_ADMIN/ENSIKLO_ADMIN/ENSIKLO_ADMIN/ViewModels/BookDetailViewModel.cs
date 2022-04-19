@@ -37,6 +37,8 @@ namespace ENSIKLO_ADMIN.ViewModels
         private readonly IBookService _bookService;
         public Command DeleteBookCommand { get; }
 
+        public Command TappedCommand { get; }
+
         public BookDetailViewModel(IBookService bookService)
         {
             _bookService = bookService;
@@ -44,6 +46,8 @@ namespace ENSIKLO_ADMIN.ViewModels
             DeleteBookCommand = new Command(async bookid => await OnDeleteBook(bookid: BookId));
 
             //DeleteBookCommand = new Command(async () => await OnDeleteBook());
+
+            TappedCommand = new Command(async bookid => await UpdateBookTapped(book_id: int.Parse(BookId)));
         }
 
         
@@ -120,7 +124,7 @@ namespace ENSIKLO_ADMIN.ViewModels
             try
             {
                 var book = await _bookService.GetItemAsync(int.Parse(bookId));
-                Debug.WriteLine("Pass in here");
+                Debug.WriteLine("Pass in hereeeeeeeeee");
                 if (bookId != null)
                 {
                     Id = book.Id_book;
@@ -173,6 +177,11 @@ namespace ENSIKLO_ADMIN.ViewModels
         //    var result = await UserDialogs.Instance.ConfirmAsync("Are you sure to delete this book ?", "Confirm Selection", "Yes", "No");
         //    Debug.WriteLine(result);
         //}
+
+        private async Task UpdateBookTapped(int book_id)
+        {
+            await Shell.Current.GoToAsync($"{nameof(UpdateBookPage)}?{nameof(UpdateBookViewModel.BookId)}={book_id}");
+        }
 
 
 

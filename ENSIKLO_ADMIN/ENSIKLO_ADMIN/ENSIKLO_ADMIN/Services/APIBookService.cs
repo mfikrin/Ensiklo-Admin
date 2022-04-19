@@ -67,9 +67,8 @@ namespace ENSIKLO_ADMIN.Services
 
         public async Task<bool> UpdateItemAsync(Book item)
         {
-            var response = await _httpClient.PutAsync($"Book?id={item.Id_book}",
+            var response = await _httpClient.PutAsync($"Book/updateBook/{item.Id_book}",
                 new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json"));
-
             response.EnsureSuccessStatusCode();
 
             return await Task.FromResult(true);

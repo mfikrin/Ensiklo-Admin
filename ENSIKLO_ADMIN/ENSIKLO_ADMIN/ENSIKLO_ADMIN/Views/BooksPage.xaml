@@ -67,7 +67,7 @@
 
 
 
-                                        <Label Text="{Binding Description_book}"
+                                        <Label Text="{Binding Author}"
                                                             Grid.Row="1"
                                                             Grid.Column="1"
                                                             VerticalOptions="Start"

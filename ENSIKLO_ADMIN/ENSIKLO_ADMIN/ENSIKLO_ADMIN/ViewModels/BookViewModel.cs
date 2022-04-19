@@ -84,6 +84,7 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         public async void PopulateBooks()
         {
+            IsBusy = true;
             try
             {
                 Books.Clear();
@@ -97,6 +98,10 @@ namespace ENSIKLO_ADMIN.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

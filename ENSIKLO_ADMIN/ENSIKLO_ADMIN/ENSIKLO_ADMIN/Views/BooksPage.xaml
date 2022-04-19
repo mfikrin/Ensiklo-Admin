@@ -6,35 +6,35 @@
              xmlns:local="clr-namespace:ENSIKLO_ADMIN.ViewModels"
              x:Name="BrowseBooksPage"
              BackgroundColor="WhiteSmoke">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddBookCommand}" />
-    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ScrollView Orientation="Vertical" Margin="10,10,10,10">
-            <!--<RefreshView x:DataType="local:BookViewModel" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">-->
-                <CollectionView 
-                            ItemsSource="{Binding Books}" 
-                            x:Name="ItemsListView" 
-                            SelectionMode="Single"
-                            HeightRequest="100"
-                            SelectedItem="{Binding SelectedBook}"
-                            >
-                    <CollectionView.EmptyView>
 
-                        <StackLayout>
-                            <Label Text="No data Available" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Label>
-                        </StackLayout>
+        <ScrollView Orientation="Vertical">
+            <StackLayout
+                Margin="10"
+                HeightRequest="200">
+
+                <RefreshView x:DataType="local:BookViewModel" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+                    <CollectionView 
+                                ItemsSource="{Binding Books}" 
+                                Margin="10"
+                                x:Name="ItemsListView" 
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedBook}"
+                                EmptyView="No data Available"
+                                >
 
 
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="6" HorizontalItemSpacing="4" VerticalItemSpacing="4"/>
-                    </CollectionView.ItemsLayout>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="7" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
+                        </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame CornerRadius="12" 
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+
+                                <Frame CornerRadius="12" 
                                            HorizontalOptions="Center" 
                                            VerticalOptions="Start"
                                            HasShadow="True"
@@ -42,59 +42,54 @@
                                            BorderColor="Gray"         
                                            IsClippedToBounds="True"
                                            Padding="0">
-                                <Grid Padding="8" Margin="4" x:DataType="model:Book" BackgroundColor="White">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="3*" />
 
-                                        <RowDefinition Height="1*" />
-                                    </Grid.RowDefinitions>
+                                    <Grid x:DataType="model:Book" >
 
-                                    <Image Source="{Binding Url_cover}"
-                                                       Grid.Row="0"
-                                                       Aspect="AspectFit" 
-                                                       WidthRequest="30"
-                                                       HeightRequest="150"
-                                                       />
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*" />
+                                            <RowDefinition Height=".6*" />
+                                        </Grid.RowDefinitions>
 
 
-                                    <StackLayout Grid.Row="1">
-                                        <Label Grid.Column="1"
-                                                           VerticalOptions="Center"
-                                                           Text="{Binding Title}"
-                                                           FontAttributes="Bold"
-                                                           TextColor="Black"    
+                                        <Image Source="{Binding Url_cover}"
+                                                           Grid.Row="0"
+                                                           Aspect="AspectFill" 
+                                                           WidthRequest="100"
+                                                           HeightRequest="100"
                                                            />
 
 
+                                        <StackLayout Grid.Row="1">
 
-                                        <Label Text="{Binding Description_book}"
-                                                            Grid.Row="1"
-                                                            Grid.Column="1"
-                                                            VerticalOptions="Start"
-                                                            FontAttributes="Italic"
-                                                            TextColor="Black"
-                                                            />
+                                            <Label Grid.Column="1"
+                                                       HorizontalOptions="CenterAndExpand"
+                                                       TextColor="Black"
+                                                       Text="{Binding Title}"
+                                                       FontAttributes="Bold"
+                                                      />
 
 
+                                            <Label Text="{Binding Author}"
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        TextColor="Black"
+                                                        FontAttributes="Italic"
+                                                        />
+                                        </StackLayout>
 
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer 
-                                                    NumberOfTapsRequired="1"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:BookViewModel}}, Path=BookTapped}"		
-                                                    CommandParameter="{Binding .}">
-                                            </TapGestureRecognizer>
-                                        </StackLayout.GestureRecognizers>
+                                    </Grid>
 
-                                    </StackLayout>
 
-                                </Grid>
-                            </Frame>
+                                </Frame>
 
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                            </DataTemplate>
 
-            <!--</RefreshView>-->
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </StackLayout>
+
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

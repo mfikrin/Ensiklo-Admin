@@ -41,7 +41,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button Text="Preview" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="0" BackgroundColor="Transparent" BorderColor="DarkGray" CornerRadius="15"></Button>
+                    <Button Text="Preview" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="0" TextColor="Black" BackgroundColor="Transparent" BorderColor="DarkGray" CornerRadius="15"></Button>
                     <Button Text="Delete from Catalogue" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="1" CornerRadius="15" BackgroundColor="#F00000" Command="{Binding DeleteBookCommand}"></Button>
                 </Grid>
             </StackLayout>

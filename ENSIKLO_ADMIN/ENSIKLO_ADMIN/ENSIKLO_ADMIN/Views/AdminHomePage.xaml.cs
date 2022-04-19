@@ -20,7 +20,13 @@ namespace ENSIKLO_ADMIN.Views
             InitializeComponent();
             _adminPageViewModel = Startup.Resolve<AdminPageViewModel>();
             BindingContext = _adminPageViewModel;
-            _adminPageViewModel.GetDatas();
+            //_adminPageViewModel.GetDatas();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _adminPageViewModel?.GetDatas();
         }
     }
 }

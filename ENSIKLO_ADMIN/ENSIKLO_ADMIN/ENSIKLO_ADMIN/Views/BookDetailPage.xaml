@@ -4,9 +4,9 @@
              x:Class="ENSIKLO_ADMIN.Views.BookDetailPage"
              BackgroundColor="WhiteSmoke">
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete Book" Command="{Binding DeleteBookCommand}" />
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
 
 
     <StackLayout Spacing="20" Padding="15" Margin="20">
@@ -41,8 +41,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button Text="Delete" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="0" CornerRadius="15" BackgroundColor="Red" BorderColor="DarkGray"></Button>
-                    <Button Text="Preview" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="1" BackgroundColor="#2196F3" BorderColor="DarkGray" CornerRadius="15" TextColor="White"></Button>
+                    <Button Text="Preview" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="0" BackgroundColor="Transparent" BorderColor="DarkGray" CornerRadius="15"></Button>
+                    <Button Text="Delete from Catalogue" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="1" CornerRadius="15" BackgroundColor="#F00000" Command="{Binding DeleteBookCommand}"></Button>
                 </Grid>
             </StackLayout>
 

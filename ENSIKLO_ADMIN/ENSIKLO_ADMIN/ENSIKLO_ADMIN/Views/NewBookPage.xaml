@@ -80,6 +80,11 @@
                 <Editor Text="{Binding Keywords, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
             </Grid>
 
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="ISBN" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Isbn, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+
 
 
             <StackLayout Orientation="Horizontal" Margin="0, 30, 0, 0">

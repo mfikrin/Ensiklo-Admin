@@ -19,8 +19,11 @@ namespace ENSIKLO_ADMIN.ViewModels
         public Command LoadBooksCommand { get; }
         public Command AddBookCommand { get; }
         //public Command<object> ThreeDotCommand { get; }
+        public string search_input;
 
         public Command TappedCommand { get; }
+
+        public Command SearchCommand { get; }
 
         //public Command<Book> BookTapped { get; }
 
@@ -41,6 +44,8 @@ namespace ENSIKLO_ADMIN.ViewModels
             //ThreeDotCommand = new Command<object>(OnthreeDotClick);
 
             TappedCommand = new Command(onTapped);
+            SearchCommand = new Command(OnSearchClicked);
+
         }
 
         //private async void OnthreeDotClick(object param)
@@ -84,6 +89,7 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         public async void PopulateBooks()
         {
+            IsBusy = true;
             try
             {
                 Books.Clear();
@@ -97,6 +103,10 @@ namespace ENSIKLO_ADMIN.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -143,6 +153,17 @@ namespace ENSIKLO_ADMIN.ViewModels
         private async void OnAddBook(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewBookPage));
+        }
+
+        public string SearchInput
+        {
+            get => search_input;
+            set => SetProperty(ref search_input, value);
+        }
+
+        private async void OnSearchClicked()
+        {
+            await Shell.Current.GoToAsync($"{nameof(SearchResultPage)}?{nameof(SearchResultViewModel.SearchQuery)}={search_input}");
         }
 
         private async void onTapped(object obj)

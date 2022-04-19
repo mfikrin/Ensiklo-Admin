@@ -13,16 +13,7 @@
                 <Button BackgroundColor="#009BF0" CornerRadius="10" TextColor="White" Text="Sign In" Margin="0,20"
                         Command="{Binding LoginCommand}">
                 </Button>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Don't Have an account?"></Label>
-                    <Label Text="Sign Up" TextColor="#009BF0">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                Command="{Binding TappedCommand}"
-                                />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </StackLayout>
+
 
             </StackLayout>
         </Frame>

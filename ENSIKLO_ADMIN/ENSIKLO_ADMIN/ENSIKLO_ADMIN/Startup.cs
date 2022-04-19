@@ -49,6 +49,8 @@ namespace ENSIKLO_ADMIN
             services.AddTransient<AdminPageViewModel>();
             services.AddTransient<UpdateBookViewModel>();
 
+            services.AddTransient<SearchResultViewModel>();
+            
             serviceProvider = services.BuildServiceProvider();
         }
 

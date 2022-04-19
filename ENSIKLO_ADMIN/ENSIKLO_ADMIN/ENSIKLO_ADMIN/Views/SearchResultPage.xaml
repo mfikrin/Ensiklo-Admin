@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ENSIKLO_ADMIN.Views.BooksPage"
-             xmlns:model="clr-namespace:ENSIKLO_ADMIN.Models"
-             xmlns:local="clr-namespace:ENSIKLO_ADMIN.ViewModels"
-             x:Name="BrowseBooksPage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:ENSIKLO_ADMIN.ViewModels" xmlns:model="clr-namespace:ENSIKLO_ADMIN.Models"
+             x:Class="ENSIKLO_ADMIN.Views.SearchResultPage"
              BackgroundColor="WhiteSmoke">
-
     <ContentPage.Content>
-
         <ScrollView Orientation="Vertical">
             <StackLayout
                 Margin="10"
@@ -19,27 +14,26 @@
                 <Button BackgroundColor="#009BF0" CornerRadius="10" TextColor="White" Text="Search" Margin="0,10"
                             Command="{Binding SearchCommand}" WidthRequest="200"></Button>
 
-                <RefreshView x:DataType="local:BookViewModel" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <RefreshView x:DataType="local:SearchResultViewModel" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
 
-                    <CollectionView 
-                                ItemsSource="{Binding Books}" 
+
+                            <CollectionView 
+                                ItemsSource="{Binding BooksBottom}" 
                                 Margin="10"
-                                x:Name="ItemsListView" 
+                                x:Name="ItemsListViewBottom" 
                                 SelectionMode="Single"
                                 SelectedItem="{Binding SelectedBook}"
                                 EmptyView="No data Available"
                                 >
 
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="7" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
+                                </CollectionView.ItemsLayout>
 
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" Span="7" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
-                        </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-
-
-                                <Frame CornerRadius="12" 
+                                        <Frame CornerRadius="12" 
                                            HorizontalOptions="Center" 
                                            VerticalOptions="Start"
                                            HasShadow="True"
@@ -48,15 +42,15 @@
                                            IsClippedToBounds="True"
                                            Padding="0">
 
-                                    <Grid x:DataType="model:Book" >
+                                            <Grid x:DataType="model:Book" >
 
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="1*" />
-                                            <RowDefinition Height=".6*" />
-                                        </Grid.RowDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="1*" />
+                                                    <RowDefinition Height=".6*" />
+                                                </Grid.RowDefinitions>
 
 
-                                        <Image Source="{Binding Url_cover}"
+                                                <Image Source="{Binding Url_cover}"
                                                            Grid.Row="0"
                                                            Aspect="AspectFill" 
                                                            WidthRequest="100"
@@ -64,9 +58,9 @@
                                                            />
 
 
-                                        <StackLayout Grid.Row="1">
+                                                <StackLayout Grid.Row="1">
 
-                                            <Label Grid.Column="1"
+                                                    <Label Grid.Column="1"
                                                        HorizontalOptions="CenterAndExpand"
                                                        TextColor="Black"
                                                        Text="{Binding Title}"
@@ -74,27 +68,31 @@
                                                       />
 
 
-                                            <Label Text="{Binding Author}"
+                                                    <Label Text="{Binding Author}"
                                                         Grid.Row="1"
                                                         Grid.Column="1"
                                                         HorizontalOptions="CenterAndExpand"
                                                         TextColor="Black"
                                                         FontAttributes="Italic"
                                                         />
-                                        </StackLayout>
+                                                </StackLayout>
 
-                                    </Grid>
+                                            </Grid>
 
 
-                                </Frame>
+                                        </Frame>
 
-                            </DataTemplate>
+                                    </DataTemplate>
 
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </RefreshView>
-            </StackLayout>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </RefreshView>
+                    </StackLayout>
+                <!--</Frame>-->
 
+
+
+            <!--</StackLayout>-->
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

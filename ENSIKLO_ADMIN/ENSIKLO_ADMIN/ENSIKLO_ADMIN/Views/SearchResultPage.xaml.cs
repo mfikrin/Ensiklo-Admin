@@ -11,19 +11,19 @@ using Xamarin.Forms.Xaml;
 namespace ENSIKLO_ADMIN.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : ContentPage
+    public partial class SearchResultPage : ContentPage
     {
-        private readonly ProfileViewModel _profileViewModel;
-        public ProfilePage()
+        private readonly SearchResultViewModel _searchResultViewModel;
+        public SearchResultPage()
         {
             InitializeComponent();
-            _profileViewModel = Startup.Resolve<ProfileViewModel>();
-            BindingContext = _profileViewModel;
+            _searchResultViewModel = Startup.Resolve<SearchResultViewModel>();
+            BindingContext = _searchResultViewModel;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _profileViewModel.GetData();
         }
     }
 }

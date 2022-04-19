@@ -163,8 +163,18 @@ namespace ENSIKLO_ADMIN.ViewModels
 
             //TODO: Add confirmation Before Delete
 
-            await _bookService.DeleteItemAsync(int.Parse(bookid));
-            await Shell.Current.GoToAsync(nameof(BooksPage));
+            try
+            {
+                await _bookService.DeleteItemAsync(int.Parse(bookid));
+                await Shell.Current.GoToAsync(nameof(BooksPage));
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine("Book in library user");
+                Debug.WriteLine(ex.Message);
+            }
+            
 
             
 

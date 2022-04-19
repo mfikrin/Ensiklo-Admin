@@ -71,6 +71,28 @@ namespace ENSIKLO_ADMIN.Services
             return JsonSerializer.Deserialize<Admin>(removeSqrBracket);
         }
 
+        public Task<NumAdmins> GetNumAdminsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<NumUsers> GetNumUsersAsync()
+        {
+            var response = await _httpClient.GetAsync($"Admin/GetTotalUser");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseAsString = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(responseAsString);
+
+            var removeSqrBracket = responseAsString.Substring(1, responseAsString.Length - 2);
+
+            Debug.WriteLine(removeSqrBracket);
+
+            //responseAsString = @"{""id_book"":1,""title"":""test judul"",""author"":""siapa"",""publisher"":""Gra"",""year_published"":""2001"",""description_book"":""bagus bgt lho"",""book_content"":""https://www.google.com"",""url_cover"":""https://res.cloudinary.com/ensiklo/image/upload/v1645609810/samples/compact_cover_book_xjkzwq.jpg"",""category"":""science"",""keywords"":""science, nature""}";
+            return JsonSerializer.Deserialize<NumUsers>(removeSqrBracket);
+        }
+
         public async Task<string> LoginAdminAsync(LoginRequest loginRequest)
         {
             var response = await _httpClient.PostAsync("Admin/login",

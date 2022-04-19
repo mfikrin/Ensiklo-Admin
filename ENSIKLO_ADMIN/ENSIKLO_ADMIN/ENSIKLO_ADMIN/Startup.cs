@@ -31,7 +31,7 @@ namespace ENSIKLO_ADMIN
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 
-            services.AddHttpClient<IUserService, APIUserService>(client =>
+            services.AddHttpClient<IAdminService, APIAdminService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:49067/api/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");

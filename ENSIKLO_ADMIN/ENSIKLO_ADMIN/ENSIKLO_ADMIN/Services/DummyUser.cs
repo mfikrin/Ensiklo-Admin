@@ -9,49 +9,79 @@ namespace ENSIKLO_ADMIN.Services
 {
     public class DummyUser : IUserService
     {
-        readonly List<User> users;
+        readonly List<Admin> users;
 
         public DummyUser()
         {
-            users = new List<User>()
+            users = new List<Admin>()
             {
-                new User {Id_user = 1,Email="fikri@gmail.com",Username="Fikri",Password="Rahasia",Role="admin"},
-                new User {Id_user = 2,Email="fikriClone1@gmail.com",Username="Fikri1",Password="Rahasia1",Role="user"},
-                new User {Id_user = 3,Email="fikriClone2@gmail.com",Username="Fikri2",Password="Rahasia2",Role="user"},
+                new Admin {Id = 1,Email="fikri@gmail.com",Username="Fikri",Password="Rahasia"},
+                new Admin {Id = 2,Email="fikriClone1@gmail.com",Username="Fikri1",Password="Rahasia1"},
+                new Admin {Id = 3,Email="fikriClone2@gmail.com",Username="Fikri2",Password="Rahasia2"},
             };
         }
-        public async Task<bool> AddUserAsync(User item)
+        public async Task<bool> AddUserAsync(Admin item)
         {
             users.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteUserAsync(int id)
+        public Task<bool> AddUserAsync(User item)
         {
-            var oldItem = users.Where((User arg) => arg.Id_user == id).FirstOrDefault();
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> DeleteUserAsync(Int64 id)
+        {
+            var oldItem = users.Where((Admin arg) => arg.Id == id).FirstOrDefault();
             users.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<User> GetUserAsync(int id)
+        public Task<User> GetCurrentUser()
         {
-            return await Task.FromResult(users.FirstOrDefault(s => s.Id_user == id));
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync(bool forceRefresh = false)
+        public async Task<Admin> GetUserAsync(Int64 id)
+        {
+            return await Task.FromResult(users.FirstOrDefault(s => s.Id == id));
+        }
+
+        public async Task<IEnumerable<Admin>> GetUsersAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(users);
         }
 
-        public async Task<bool> UpdateUserAsync(User item)
+        public Task<string> LoginAsync(LoginRequest loginRequest)
         {
-            var oldItem = users.Where((User arg) => arg.Id_user == item.Id_user).FirstOrDefault();
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> UpdateUserAsync(Admin item)
+        {
+            var oldItem = users.Where((Admin arg) => arg.Id == item.Id).FirstOrDefault();
             users.Remove(oldItem);
             users.Add(item);
 
             return await Task.FromResult(true);
+        }
+
+        public Task<bool> UpdateUserAsync(User item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<User> IUserService.GetUserAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<User>> IUserService.GetUsersAsync(bool forceRefresh)
+        {
+            throw new NotImplementedException();
         }
     }
 }

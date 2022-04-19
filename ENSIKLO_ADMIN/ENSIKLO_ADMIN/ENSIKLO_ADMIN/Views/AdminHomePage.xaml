@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ENSIKLO_ADMIN.Views.AdminHomePage">
+             x:Class="ENSIKLO_ADMIN.Views.AdminHomePage"
+             BackgroundColor="WhiteSmoke">
 
     <ContentPage.Content>
         <ScrollView Orientation="Vertical">
@@ -15,11 +16,15 @@
                        Margin="10"
                        Padding="0"
                     >
-                    <StackLayout HeightRequest="190">
-                        <Label Text="Shortcuts" FontSize="25" FontAttributes="Bold" Margin="40, 40, 0, 0"/>
+                    <StackLayout HeightRequest="200">
+                        <Label Text="Shortcuts" FontSize="25" FontAttributes="Bold" Margin="40, 20, 0, 0" HorizontalOptions="CenterAndExpand"/>
                         <Grid Margin="40, 20, 40, 0">
-                            <Button Text="Add new book" Command="{Binding NewBookCommand}" CornerRadius="20" Grid.Column="0" BackgroundColor="White" TextColor="Black" HeightRequest="40" WidthRequest="50"/>
-                            <Button Text="Add new category" Command="{Binding NewCatCommand}" CornerRadius="20" Grid.Column="1" BackgroundColor="White" TextColor="Black" HeightRequest="40" WidthRequest="50"/>
+                            <!--<ImageButton Source="addBook.png" Command="{Binding NewBookCommand}" CornerRadius="20" Grid.Column="0" BackgroundColor="White" HeightRequest="40" WidthRequest="50"/>-->
+                            <ImageButton Source="Assets/addBook.png" Command="{Binding NewBookCommand}" Grid.Column="0" HeightRequest="80" WidthRequest="80" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <ImageButton Source="Assets/addBook.png" Command="{Binding NewCatCommand}" Grid.Column="1" HeightRequest="80" WidthRequest="80"/>
+
+
+                            <!--<ImageButton Source="addBook.png" Command="{Binding NewCatCommand}" CornerRadius="20" Grid.Column="1" BackgroundColor="White" HeightRequest="40" WidthRequest="50"/>-->
                         </Grid>
                     </StackLayout>
                 </Frame>
@@ -48,6 +53,14 @@
                                 <FormattedString>
                                     <Span Text="Total books: " FontAttributes="Bold" FontSize="18"/>
                                     <Span Text="{Binding BookTotal}" FontSize="18" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Margin="40, 0, 0, 0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Total category: " FontAttributes="Bold" FontSize="18"/>
+                                    <Span Text="{Binding CategoryTotal}" FontSize="18" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>

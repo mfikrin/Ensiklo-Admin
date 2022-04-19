@@ -9,9 +9,11 @@ namespace ENSIKLO_ADMIN.Services
     public interface IUserService
     {
         Task<bool> AddUserAsync(User item);
+        Task<string> LoginAsync(LoginRequest loginRequest);
         Task<bool> UpdateUserAsync(User item);
-        Task<bool> DeleteUserAsync(int id);
-        Task<User> GetUserAsync(int id);
+        Task<bool> DeleteUserAsync(Int64 id);
+        Task<User> GetUserAsync(Int64 id);
+        Task<User> GetCurrentUser();
         Task<IEnumerable<User>> GetUsersAsync(bool forceRefresh = false);
     }
 }

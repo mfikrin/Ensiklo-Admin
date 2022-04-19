@@ -6,21 +6,25 @@ using System.Text;
 using System.Diagnostics;
 using Xamarin.Forms;
 using ENSIKLO_ADMIN.Views;
+using System.Linq;
 
 namespace ENSIKLO_ADMIN.ViewModels
 {
     public class AdminPageViewModel : BaseViewModel
     {
-        private readonly IUserService _userService;
+        private readonly IAdminService _adminService;
         private readonly IBookService _bookService;
+        private readonly ICatService _catService;
         public int userTotal;
         public int bookTotal;
+        public int categoryTotal;
 
 
-        public AdminPageViewModel(IUserService userService, IBookService bookService)
+        public AdminPageViewModel(IAdminService adminService, IBookService bookService, ICatService catService)
         {
-            _userService = userService;
+            _adminService = adminService;
             _bookService = bookService;
+            _catService = catService;
             NewCatCommand = new Command(OnNewCat);
             NewBookCommand = new Command(OnBookCat);
         }
@@ -29,20 +33,24 @@ namespace ENSIKLO_ADMIN.ViewModels
         {
             userTotal = 0;
             bookTotal = 0;
+            categoryTotal = 0;
+            //BLOM ADA GETUSERSASYNC PLS HELP
             //var user = await _userService.GetUsersAsync();
             //foreach (var item in user)
             //{
             //    userTotal += 1;
             //}
             var books = await _bookService.GetItemsAsync();
-            foreach (var book in books)
-            {
-                bookTotal += 1;
-            }
+            var categories = await _catService.GetCatsAsync();
+
+            bookTotal = books.Count();
+            categoryTotal = categories.Count();
+
             Debug.WriteLine(bookTotal);
             Debug.WriteLine(userTotal);
             BookTotal = bookTotal;
             UserTotal = userTotal;
+            CategoryTotal = categoryTotal;
 
         }
 
@@ -64,6 +72,16 @@ namespace ENSIKLO_ADMIN.ViewModels
             {
                 bookTotal = value;
                 OnPropertyChanged(nameof(BookTotal));
+            }
+        }
+
+        public int CategoryTotal
+        {
+            get => categoryTotal;
+            set
+            {
+                categoryTotal = value;
+                OnPropertyChanged(nameof(CategoryTotal));
             }
         }
         public Command NewCatCommand { get; }

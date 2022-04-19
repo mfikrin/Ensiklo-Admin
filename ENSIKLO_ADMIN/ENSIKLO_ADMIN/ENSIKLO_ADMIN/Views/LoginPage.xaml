@@ -8,11 +8,10 @@
         <Image VerticalOptions="CenterAndExpand" Source="Assets/logo.png" WidthRequest="200" HeightRequest="200"/>
         <Frame VerticalOptions="CenterAndExpand" CornerRadius="10" Margin="150,0" Padding="100,35">
             <StackLayout>
-                <Entry Placeholder="Email"></Entry>
-                <Entry Placeholder="Password" IsPassword="True"></Entry>
+                <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}"></Entry>
+                <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password, Mode=TwoWay}"></Entry>
                 <Button BackgroundColor="#009BF0" CornerRadius="10" TextColor="White" Text="Sign In" Margin="0,20"
                         Command="{Binding LoginCommand}">
-                    <!--CommandParameter="{Binding Role}" TAMBAHIN INI DI BUTTON -->
                 </Button>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Don't Have an account?"></Label>

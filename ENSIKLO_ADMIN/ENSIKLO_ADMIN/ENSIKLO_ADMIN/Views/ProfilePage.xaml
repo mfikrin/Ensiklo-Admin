@@ -3,12 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ENSIKLO_ADMIN.Views.ProfilePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="Logout"
-                Command="{Binding LogoutCommand}">
+        <ScrollView Orientation="Vertical">
+            <StackLayout BackgroundColor="WhiteSmoke">
+                <StackLayout BackgroundColor="WhiteSmoke" Margin="45, 45, 45, 45">
 
-            </Button>
-        </StackLayout>
+                    <Label Text="{Binding Name, Mode=TwoWay}" TextColor="Black" FontSize="35" FontAttributes="Bold"/>
+                    <Label Text="{Binding Email, Mode=TwoWay}" TextColor="Gray" FontSize="20" />
+                    <!-- <Label Text="Edit my profile" TextColor="#009BF0" FontSize="10" FontAttributes="Italic,Bold"  Margin="0, 0, 0, 20">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding UpdateProfile}"
+                                />
+                        </Label.GestureRecognizers>
+                    </Label> -->
+
+                    <Button Text="Logout" CornerRadius="10" BorderColor="#009BF0" BackgroundColor="Transparent" TextColor="#009BF0" HorizontalOptions="Start"
+                        Command="{Binding LogoutCommand}">
+                    </Button>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
 
     </ContentPage.Content>
 </ContentPage>

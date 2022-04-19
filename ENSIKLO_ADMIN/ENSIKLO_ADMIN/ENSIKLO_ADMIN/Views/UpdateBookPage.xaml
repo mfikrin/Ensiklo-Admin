@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ENSIKLO_ADMIN.Views.UpdateBookPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="New Book"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout Spacing="6" Padding="15" Margin="45, 90, 45, 45" >
+            <Label Text="Edit Book" FontSize="Large" FontAttributes="Bold" Grid.Column="0"/>
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Title" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Title , Mode=TwoWay}" FontSize="Medium" Grid.Column="1"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Author" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Author, Mode=TwoWay}" FontSize="Medium" Grid.Column="1"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Publisher" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Publisher, Mode=TwoWay}" FontSize="Medium" Grid.Column="1"/>
+            </Grid>
+
+            <Grid>
+                <Grid Grid.Column="0" ColumnDefinitions="200, *">
+                    <Label Text="Date published" FontSize="Medium" Grid.Column="0"/>
+                </Grid>
+                <Grid Grid.Column="1" ColumnDefinitions="50, *">
+                    <Label Text="Day" FontSize="Medium" Grid.Column="0"/>
+                    <Editor Text="{Binding Day, Mode=TwoWay}" FontSize="Medium" Grid.Column="1"/>
+                </Grid>
+                <Grid Grid.Column="2" ColumnDefinitions="80, *">
+                    <Label Text="Month" FontSize="Medium" Grid.Column="0"/>
+                    <Editor Text="{Binding Month, Mode=TwoWay}" FontSize="Medium" Grid.Column="1"/>
+                </Grid>
+                <Grid Grid.Column="3" ColumnDefinitions="50, *">
+                    <Label Text="Year" FontSize="Medium" Grid.Column="0"/>
+                    <Editor Text="{Binding Year, Mode=TwoWay}" FontSize="Medium" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Book content" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Book_content, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Total page count" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Page, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Description Book" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Description_book, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Url Cover" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Url_cover, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+
+            <Grid>
+
+                <Grid ColumnDefinitions="200, *" Grid.Column="0">
+                    <Label Text="Categories" FontSize="Medium" Grid.Column="0"/>
+                    <Editor Text="{Binding Category, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+                    <Picker x:Name="CatPicker" FontSize="Medium" Margin="0" Grid.Column="1" ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button Text="Add new category" Command="{Binding NewCatCommand}"/>
+                </Grid>
+            </Grid>
+
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="Keywords" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Keywords, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="200, *">
+                <Label Text="ISBN" FontSize="Medium" Grid.Column="0"/>
+                <Editor Text="{Binding Isbn, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+            </Grid>
+
+            <StackLayout Orientation="Horizontal" Margin="0, 30, 0, 0">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

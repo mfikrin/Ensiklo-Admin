@@ -1,4 +1,4 @@
-﻿using ENSIKLO_ADMIN.ViewModels;
+﻿using ENSIKLO_ADMIN;
 using ENSIKLO_ADMIN.Views;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace ENSIKLO_ADMIN
             Routing.RegisterRoute(nameof(NewBookPage), typeof(NewBookPage));
             Routing.RegisterRoute(nameof(BooksPage), typeof(BooksPage));
             Routing.RegisterRoute(nameof(NewCategoryPage), typeof(NewCategoryPage));
+            Routing.RegisterRoute(nameof(UpdateBookPage), typeof(UpdateBookPage));
             Routing.RegisterRoute(nameof(SearchResultPage), typeof(SearchResultPage));
 
         }

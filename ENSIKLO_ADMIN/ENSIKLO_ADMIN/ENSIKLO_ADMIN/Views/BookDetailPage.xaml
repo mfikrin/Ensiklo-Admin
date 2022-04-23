@@ -30,7 +30,7 @@
                 </StackLayout>
                 <Label Text="{Binding Author}" FontSize="Medium" TextColor="DarkGray">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding TappedCommand}" />
+                        <TapGestureRecognizer Command="{Binding AuthorTappedCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 

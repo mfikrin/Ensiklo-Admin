@@ -84,5 +84,15 @@ namespace ENSIKLO_ADMIN.Services
 
             return JsonSerializer.Deserialize<IEnumerable<Book>>(responseAsString);
         }
+
+        public async Task<IEnumerable<Book>> GetByPublisher(string query)
+        {
+            var response = await _httpClient.GetAsync($"Book/GetByPublisher?publisher={query}");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseAsString = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<IEnumerable<Book>>(responseAsString);
+        }
     }
 }

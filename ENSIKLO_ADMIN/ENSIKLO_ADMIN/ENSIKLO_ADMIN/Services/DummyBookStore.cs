@@ -88,5 +88,10 @@ namespace ENSIKLO_ADMIN.Services
 
             return await Task.FromResult(true);
         }
+
+        public Task<IEnumerable<Book>> GetByPublisher(string query)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

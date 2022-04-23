@@ -48,6 +48,8 @@ namespace ENSIKLO_ADMIN
             services.AddTransient<NewCategoryViewModel>();
             services.AddTransient<AdminPageViewModel>();
             services.AddTransient<UpdateBookViewModel>();
+            services.AddTransient<BooksFromPublisherViewModel>();
+            //services.AddTransient<BooksFromAuthorViewModel>();
 
             services.AddTransient<SearchResultViewModel>();
             

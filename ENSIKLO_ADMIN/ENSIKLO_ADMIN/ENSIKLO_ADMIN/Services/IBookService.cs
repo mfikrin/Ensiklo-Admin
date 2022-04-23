@@ -13,5 +13,6 @@ namespace ENSIKLO_ADMIN.Services
         Task<Book> GetItemAsync(int id);
         Task<IEnumerable<Book>> GetItemsAsync(bool forceRefresh = false);
         Task<IEnumerable<Book>> SearchBooks(string query);
+        Task<IEnumerable<Book>> GetByPublisher(string query);
     }
 }

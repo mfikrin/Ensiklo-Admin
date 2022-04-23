@@ -36,8 +36,8 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         private readonly IBookService _bookService;
         public Command DeleteBookCommand { get; }
-
         public Command TappedCommand { get; }
+        public Command PublisherTappedCommand { get; }
 
         public BookDetailViewModel(IBookService bookService)
         {
@@ -48,9 +48,16 @@ namespace ENSIKLO_ADMIN.ViewModels
             //DeleteBookCommand = new Command(async () => await OnDeleteBook());
 
             TappedCommand = new Command(async bookid => await UpdateBookTapped(book_id: int.Parse(BookId)));
+
+            PublisherTappedCommand = new Command(async publishername => await onPublisherTapped(publisher_name: Publisher));
         }
 
-        
+        private async Task onPublisherTapped(string publisher_name)
+        {
+            //await Shell.Current.GoToAsync(nameof(BooksFromPublisherPage));
+            await Shell.Current.GoToAsync($"{nameof(BooksFromPublisherPage)}?{nameof(BooksFromPublisherViewModel.PublisherName)}={publisher_name}");
+        }
+
 
         public int Id { get; set; }
         public string Title

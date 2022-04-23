@@ -28,7 +28,11 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-                <Label Text="{Binding Author}" FontSize="Medium" TextColor="DarkGray"/>
+                <Label Text="{Binding Author}" FontSize="Medium" TextColor="DarkGray">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TappedCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
                 <Label FontSize="Medium" TextColor="Black">
                     <Label.FormattedText>
@@ -39,6 +43,9 @@
                             <Span Text=")"/>
                         </FormattedString>
                     </Label.FormattedText>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PublisherTappedCommand}" />
+                    </Label.GestureRecognizers>
                 </Label>
 
                 <Label Text="{Binding Category}" FontSize="Medium" TextColor="Black"/>

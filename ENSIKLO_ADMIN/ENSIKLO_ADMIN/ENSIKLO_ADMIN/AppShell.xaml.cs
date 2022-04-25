@@ -17,6 +17,8 @@ namespace ENSIKLO_ADMIN
             Routing.RegisterRoute(nameof(NewCategoryPage), typeof(NewCategoryPage));
             Routing.RegisterRoute(nameof(UpdateBookPage), typeof(UpdateBookPage));
             Routing.RegisterRoute(nameof(SearchResultPage), typeof(SearchResultPage));
+            Routing.RegisterRoute(nameof(BooksFromPublisherPage), typeof(BooksFromPublisherPage));
+            Routing.RegisterRoute(nameof(BooksFromAuthorPage), typeof(BooksFromAuthorPage));
 
         }
 

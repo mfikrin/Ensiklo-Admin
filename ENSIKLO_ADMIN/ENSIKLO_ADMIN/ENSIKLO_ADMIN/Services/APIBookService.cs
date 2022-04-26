@@ -67,9 +67,8 @@ namespace ENSIKLO_ADMIN.Services
 
         public async Task<bool> UpdateItemAsync(Book item)
         {
-            var response = await _httpClient.PutAsync($"Book?id={item.Id_book}",
+            var response = await _httpClient.PutAsync($"Book/updateBook/{item.Id_book}",
                 new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json"));
-
             response.EnsureSuccessStatusCode();
 
             return await Task.FromResult(true);
@@ -83,6 +82,26 @@ namespace ENSIKLO_ADMIN.Services
 
             var responseAsString = await response.Content.ReadAsStringAsync();
 
+            return JsonSerializer.Deserialize<IEnumerable<Book>>(responseAsString);
+        }
+
+        public async Task<IEnumerable<Book>> GetByPublisher(string query)
+        {
+            var response = await _httpClient.GetAsync($"Book/GetByPublisher?publisher={query}");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseAsString = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<IEnumerable<Book>>(responseAsString);
+        }
+
+        public async Task<IEnumerable<Book>> GetByAuthor(string query)
+        {
+            var response = await _httpClient.GetAsync($"Book/GetByAuthor?author={query}");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseAsString = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<IEnumerable<Book>>(responseAsString);
         }
     }

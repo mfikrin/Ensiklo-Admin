@@ -36,6 +36,9 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         private readonly IBookService _bookService;
         public Command DeleteBookCommand { get; }
+        public Command TappedCommand { get; }
+        public Command PublisherTappedCommand { get; }
+        public Command AuthorTappedCommand { get; }
 
         public BookDetailViewModel(IBookService bookService)
         {
@@ -44,9 +47,25 @@ namespace ENSIKLO_ADMIN.ViewModels
             DeleteBookCommand = new Command(async bookid => await OnDeleteBook(bookid: BookId));
 
             //DeleteBookCommand = new Command(async () => await OnDeleteBook());
+
+            TappedCommand = new Command(async bookid => await UpdateBookTapped(book_id: int.Parse(BookId)));
+
+            PublisherTappedCommand = new Command(async publishername => await onPublisherTapped(publisher_name: Publisher));
+            AuthorTappedCommand = new Command(async authorname => await onAuthorTapped(author_name: Author));
+
         }
 
-        
+        private async Task onPublisherTapped(string publisher_name)
+        {
+            //await Shell.Current.GoToAsync(nameof(BooksFromPublisherPage));
+            await Shell.Current.GoToAsync($"{nameof(BooksFromPublisherPage)}?{nameof(BooksFromPublisherViewModel.PublisherName)}={publisher_name}");
+        }
+
+        private async Task onAuthorTapped(string author_name)
+        {
+            await Shell.Current.GoToAsync($"{nameof(BooksFromAuthorPage)}?{nameof(BooksFromAuthorViewModel.AuthorName)}={author_name}");
+        }
+
 
         public int Id { get; set; }
         public string Title
@@ -120,7 +139,7 @@ namespace ENSIKLO_ADMIN.ViewModels
             try
             {
                 var book = await _bookService.GetItemAsync(int.Parse(bookId));
-                Debug.WriteLine("Pass in here");
+                Debug.WriteLine("Pass in hereeeeeeeeee");
                 if (bookId != null)
                 {
                     Id = book.Id_book;
@@ -183,6 +202,11 @@ namespace ENSIKLO_ADMIN.ViewModels
         //    var result = await UserDialogs.Instance.ConfirmAsync("Are you sure to delete this book ?", "Confirm Selection", "Yes", "No");
         //    Debug.WriteLine(result);
         //}
+
+        private async Task UpdateBookTapped(int book_id)
+        {
+            await Shell.Current.GoToAsync($"{nameof(UpdateBookPage)}?{nameof(UpdateBookViewModel.BookId)}={book_id}");
+        }
 
 
 

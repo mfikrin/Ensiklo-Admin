@@ -21,7 +21,7 @@
                         <Grid Margin="40, 20, 40, 0">
                             <!--<ImageButton Source="addBook.png" Command="{Binding NewBookCommand}" CornerRadius="20" Grid.Column="0" BackgroundColor="White" HeightRequest="40" WidthRequest="50"/>-->
                             <ImageButton Source="Assets/addBook.png" Command="{Binding NewBookCommand}" Grid.Column="0" HeightRequest="80" WidthRequest="80" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                            <ImageButton Source="Assets/addBook.png" Command="{Binding NewCatCommand}" Grid.Column="1" HeightRequest="80" WidthRequest="80"/>
+                            <ImageButton Source="Assets/addCat.png" Command="{Binding NewCatCommand}" Grid.Column="1" HeightRequest="80" WidthRequest="80"/>
 
 
                             <!--<ImageButton Source="addBook.png" Command="{Binding NewCatCommand}" CornerRadius="20" Grid.Column="1" BackgroundColor="White" HeightRequest="40" WidthRequest="50"/>-->

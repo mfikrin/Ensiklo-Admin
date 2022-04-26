@@ -8,64 +8,69 @@
         <ToolbarItem Text="Delete Book" Command="{Binding DeleteBookCommand}" />
     </ContentPage.ToolbarItems>-->
 
+    <ScrollView Orientation="Vertical">
+        <StackLayout Spacing="20" Padding="15" Margin="20">
+            <Grid>
 
-    <StackLayout Spacing="20" Padding="15" Margin="20">
-        <Grid>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Column="0" Margin="75, 0, 0, 0">
-                <Image Source="{Binding Url_cover}" WidthRequest="180"/>
-            </StackLayout>
-            <StackLayout Grid.Column="1" Padding="20, -5, 0, 0">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
-                    <Label Text="edit book" HorizontalOptions="Start" FontAttributes="Italic" TextColor="#009BF0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Column="0" Margin="75, 0, 0, 0">
+                    <Image Source="{Binding Url_cover}" WidthRequest="180"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1" Padding="20, -5, 0, 0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="edit book" HorizontalOptions="Start" FontAttributes="Italic" TextColor="#009BF0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TappedCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <Label Text="{Binding Author}" FontSize="Medium" TextColor="DarkGray">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding TappedCommand}" />
+                            <TapGestureRecognizer Command="{Binding AuthorTappedCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
+
+                    <Label FontSize="Medium" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Publisher}"/>
+                                <Span Text=" ("/>
+                                <Span Text="{Binding Year_published, StringFormat='{0:MMMM dd, yyyy}'}" />
+                                <Span Text=")"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PublisherTappedCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label Text="{Binding Category}" FontSize="Medium" TextColor="Black"/>
+
+                    <Grid Margin="0, 15, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Text="Preview" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="0" TextColor="Black" BackgroundColor="Transparent" BorderColor="DarkGray" CornerRadius="15"></Button>
+                        <Button Text="Delete from Catalogue" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="1" CornerRadius="15" BackgroundColor="#F00000" Command="{Binding DeleteBookCommand}"></Button>
+                    </Grid>
                 </StackLayout>
-                <Label Text="{Binding Author}" FontSize="Medium" TextColor="DarkGray">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AuthorTappedCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
 
-                <Label FontSize="Medium" TextColor="Black">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding Publisher}"/>
-                            <Span Text=" ("/>
-                            <Span Text="{Binding Year_published, StringFormat='{0:MMMM dd, yyyy}'}" />
-                            <Span Text=")"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding PublisherTappedCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-
-                <Label Text="{Binding Category}" FontSize="Medium" TextColor="Black"/>
-
-                <Grid Margin="0, 15, 0, 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Text="Preview" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="0" TextColor="Black" BackgroundColor="Transparent" BorderColor="DarkGray" CornerRadius="15"></Button>
-                    <Button Text="Delete from Catalogue" HeightRequest="38" HorizontalOptions="CenterAndExpand" Grid.Column="1" CornerRadius="15" BackgroundColor="#F00000" Command="{Binding DeleteBookCommand}"></Button>
-                </Grid>
+            </Grid>
+            <StackLayout>
+                <Label Text="Description" FontSize="Medium"  Margin="75, 15, 75, 0" FontAttributes="Bold" TextColor="Black"/>
+                <Label Text="{Binding Description_book}" FontSize="Small"  Margin="75, 0, 75, 0" TextColor="Black" />
+                <Label Text="{Binding Keywords}" FontAttributes="Italic" FontSize="Micro" TextColor="Gray"  Margin="75, 0, 0, 0" />
             </StackLayout>
 
-        </Grid>
-        <StackLayout>
-            <Label Text="Description" FontSize="Medium"  Margin="75, 15, 0, 0" FontAttributes="Bold" TextColor="Black"/>
-            <Label Text="{Binding Description_book}" FontSize="Small"  Margin="75, 0, 0, 0" TextColor="Black" />
-            <Label Text="{Binding Keywords}" FontAttributes="Italic" FontSize="Micro" TextColor="Black"  Margin="75, 0, 0, 0" />
         </StackLayout>
-
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

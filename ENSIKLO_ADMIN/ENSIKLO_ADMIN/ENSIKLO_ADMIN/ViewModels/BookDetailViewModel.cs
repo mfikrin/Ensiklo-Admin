@@ -1,4 +1,5 @@
-﻿using ENSIKLO_ADMIN.Models;
+﻿using Acr.UserDialogs;
+using ENSIKLO_ADMIN.Models;
 using ENSIKLO_ADMIN.Services;
 using ENSIKLO_ADMIN.Views;
 using System;
@@ -6,6 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
+using Windows.UI.Popups;
 using Xamarin.Forms;
 
 namespace ENSIKLO_ADMIN.ViewModels
@@ -40,6 +43,8 @@ namespace ENSIKLO_ADMIN.ViewModels
         public Command PublisherTappedCommand { get; }
         public Command AuthorTappedCommand { get; }
 
+        public UICommandInvokedHandler DeleteBookHandler { get; }
+      
         public BookDetailViewModel(IBookService bookService)
         {
             _bookService = bookService;
@@ -53,6 +58,18 @@ namespace ENSIKLO_ADMIN.ViewModels
             PublisherTappedCommand = new Command(async publishername => await onPublisherTapped(publisher_name: Publisher));
             AuthorTappedCommand = new Command(async authorname => await onAuthorTapped(author_name: Author));
 
+            DeleteBookHandler = new UICommandInvokedHandler(async (cmd) =>
+            {
+                if (cmd.Label == "Yes")
+                {
+                    await _bookService.DeleteItemAsync(int.Parse(BookId));
+                    await Shell.Current.GoToAsync(nameof(BooksPage));
+                }
+                else
+                {
+                    Debug.WriteLine("No");
+                }
+            });
         }
 
         private async Task onPublisherTapped(string publisher_name)
@@ -180,9 +197,57 @@ namespace ENSIKLO_ADMIN.ViewModels
 
             try
             {
-                await _bookService.DeleteItemAsync(int.Parse(bookid));
-                await Shell.Current.GoToAsync(nameof(BooksPage));
+
+                
+               // confirmation before delete message dialog
+                var dialog = new MessageDialog( "Are you sure to delete this book ?", "Confirm Selection");
+                dialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(DeleteBookHandler)));
+                dialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(DeleteBookHandler)));
+                dialog.ShowAsync();        
             }
+
+
+
+                // await _bookService.DeleteItemAsync(int.Parse(bookid));
+
+                // // var title = "Removed Book";
+                // // var content = "Are you sure to delete this book ?";
+
+                // // var yesCommand = new UICommand("Yes");
+                // // var noCommand = new UICommand("No");
+               
+
+                // // var dialog = new MessageDialog(content, title);
+                // // dialog.Options = MessageDialogOptions.None;
+                // // dialog.Commands.Add(yesCommand);
+
+                // // dialog.DefaultCommandIndex = 0;
+                // // dialog.CancelCommandIndex = 0;
+
+                // // if (noCommand != null)
+                // // {
+                // //     dialog.Commands.Add(noCommand);
+                // //     dialog.CancelCommandIndex = (uint)dialog.Commands.Count - 1;
+                // // }
+
+
+                // // var command = await dialog.ShowAsync();
+
+          
+                // // if (command == yesCommand)
+                // // {
+                // //     // handle yes command
+                // // }
+                // // else if (command == noCommand)
+                // // {
+                // //     // handle no command
+                // // }
+             
+
+                // // await App.Current.MainPage.DisplayAlert("Removed Book", "The book has been removed", "OK");
+
+                // await Shell.Current.GoToAsync(nameof(BooksPage));
+            //}
             catch (Exception ex)
             {
 

@@ -50,7 +50,7 @@ namespace ENSIKLO_ADMIN.ViewModels
 
                 await _catService.AddCatAsync(cat);
 
-                await Shell.Current.GoToAsync("//home");
+                await Shell.Current.GoToAsync("..");
             }
             catch (Exception ex)
             {

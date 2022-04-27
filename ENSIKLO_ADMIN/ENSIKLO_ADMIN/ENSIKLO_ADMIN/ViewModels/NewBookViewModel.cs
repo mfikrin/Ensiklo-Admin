@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ENSIKLO_ADMIN.ViewModels
@@ -52,6 +54,14 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         private ObservableCollection<String> categories;
 
+        public byte[] coverBytes;
+
+        public string coverFileName;
+
+        public byte[] contentBytes;
+
+        public string contentFileName;
+
         public NewBookViewModel(IBookService bookService, ICatService catService)
         {
             _bookService = bookService;
@@ -60,6 +70,8 @@ namespace ENSIKLO_ADMIN.ViewModels
             SaveCommand = new Command(async () => await OnSave(), ValidateSave);
             CancelCommand = new Command(OnCancel);
             NewCatCommand = new Command(OnNewCat);
+            UploadCoverCommand = new Command(async () => await OnUploadCover());
+            UploadContentCommand = new Command(async () => await OnUploadContent());
             PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
@@ -81,9 +93,9 @@ namespace ENSIKLO_ADMIN.ViewModels
                 && !String.IsNullOrWhiteSpace(publisher)
                 && !String.IsNullOrWhiteSpace(year_published.ToString())
                 && !String.IsNullOrWhiteSpace(description_book)
-                && !String.IsNullOrWhiteSpace(book_content)
+                && !String.IsNullOrWhiteSpace(contentFileName)
                 && !String.IsNullOrWhiteSpace(page.ToString())
-                && !String.IsNullOrWhiteSpace(url_cover)
+                && !String.IsNullOrWhiteSpace(coverFileName)
                 && !String.IsNullOrWhiteSpace(category)
                 && !String.IsNullOrWhiteSpace(keywords)
                 ;
@@ -182,6 +194,8 @@ namespace ENSIKLO_ADMIN.ViewModels
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
         public Command NewCatCommand { get; }
+        public Command UploadCoverCommand { get; }
+        public Command UploadContentCommand { get; }
 
         private async void OnCancel()
         {
@@ -221,6 +235,21 @@ namespace ENSIKLO_ADMIN.ViewModels
         {
             try
             {
+                var url = "https://dwuwgntlmmbscgwycsxt.supabase.co";
+                var key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjM2MDEzNDU0LCJleHAiOjE5NTE1ODk0NTR9.FGQn6pOkKOwiptHLudycZc21RLO9nMdsdDUGD5MsnrE";
+
+                var bucketName = "test";
+
+                await Supabase.Client.InitializeAsync(url, key);
+
+                var bucket = Supabase.Client.Instance.Storage.From(bucketName);
+
+                var coverURL = await bucket.Upload(coverBytes, $"{(new Random()).Next()}-{coverFileName}");
+                var finalCoverURL = $"https://dwuwgntlmmbscgwycsxt.supabase.co/storage/v1/object/public/{coverURL}";
+
+                var contentURL = await bucket.Upload(contentBytes, $"{(new Random()).Next()}-{contentFileName}");
+                var finalContentURL = $"https://dwuwgntlmmbscgwycsxt.supabase.co/storage/v1/object/public/{contentURL}";
+
                 //YYYY.MM,DD
                 year_published = new DateTime(Year, Month, Day);
                 Debug.WriteLine(year_published);
@@ -234,9 +263,9 @@ namespace ENSIKLO_ADMIN.ViewModels
                     Publisher = Publisher,
                     Year_published = Year_published,
                     Description_book = Description_book,
-                    Book_content = Book_content,
+                    Book_content = finalContentURL,
                     Page = Page,
-                    Url_cover = Url_cover,
+                    Url_cover = finalCoverURL,
                     Category = Category,
                     Added_time = Added_time,
                     Keywords = Keywords,
@@ -250,6 +279,44 @@ namespace ENSIKLO_ADMIN.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        async Task OnUploadCover()
+        {
+            var pickResult = await FilePicker.PickAsync(new PickOptions
+            {
+                FileTypes = FilePickerFileType.Images,
+                PickerTitle = "Pick cover"
+            });
+
+            if (pickResult != null)
+            {
+                var stream = await pickResult.OpenReadAsync();
+                MemoryStream ms = new MemoryStream();
+                stream.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                coverBytes = fileBytes;
+                coverFileName = pickResult.FileName;
+            }
+        }
+
+        async Task OnUploadContent()
+        {
+            var pickResult = await FilePicker.PickAsync(new PickOptions
+            {
+                FileTypes = FilePickerFileType.Pdf,
+                PickerTitle = "Pick content"
+            });
+
+            if (pickResult != null)
+            {
+                var stream = await pickResult.OpenReadAsync();
+                MemoryStream ms = new MemoryStream();
+                stream.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                contentBytes = fileBytes;
+                contentFileName = pickResult.FileName;
             }
         }
     }

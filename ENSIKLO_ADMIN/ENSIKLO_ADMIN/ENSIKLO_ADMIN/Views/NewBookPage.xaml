@@ -44,8 +44,7 @@
             </Grid>
 
             <Grid ColumnDefinitions="200, *">
-                <Label Text="Book content" FontSize="Medium" Grid.Column="0"/>
-                <Editor Text="{Binding Book_content, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+                <Button Text="Upload Content" Command="{Binding UploadContentCommand}"/>
             </Grid>
 
             <Grid ColumnDefinitions="200, *">
@@ -59,8 +58,7 @@
             </Grid>
 
             <Grid ColumnDefinitions="200, *">
-                <Label Text="Url Cover" FontSize="Medium" Grid.Column="0"/>
-                <Editor Text="{Binding Url_cover, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
+                <Button Text="Upload Cover" Command="{Binding UploadCoverCommand}"/>
             </Grid>
 
             <Grid>

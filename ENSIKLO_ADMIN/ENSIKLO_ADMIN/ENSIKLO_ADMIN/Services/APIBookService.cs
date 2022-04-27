@@ -20,7 +20,7 @@ namespace ENSIKLO_ADMIN.Services
         }
 
         public async Task<bool> AddItemAsync(Book item)
-        {
+        {            
             var response = await _httpClient.PostAsync("Book",
                 new StringContent(JsonSerializer.Serialize(item), Encoding.UTF8, "application/json"));
 

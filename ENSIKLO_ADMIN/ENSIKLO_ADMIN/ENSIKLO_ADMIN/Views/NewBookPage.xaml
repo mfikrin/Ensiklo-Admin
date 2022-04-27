@@ -42,9 +42,8 @@
                 </Grid>
 
                 <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand" ColumnDefinitions="200, *">
-                    <Label Text="Book content" FontSize="Medium" Grid.Column="0"/>
-                    <Editor Text="{Binding Book_content, Mode=TwoWay}"  FontSize="Medium" Margin="0" Grid.Column="1"/>
-                </Grid>
+                        <Button Text="Upload Content" Command="{Binding UploadContentCommand}"/>
+                    </Grid>
 
                 <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand" ColumnDefinitions="200, *">
                     <Label Text="Total page count" FontSize="Medium" Grid.Column="0"/>
@@ -56,12 +55,11 @@
                     <Editor Text="{Binding Description_book, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Grid.Column="1"/>
                 </Grid>
 
-                <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand" ColumnDefinitions="200, *">
-                    <Label Text="Url Cover" FontSize="Medium" Grid.Column="0"/>
-                    <Editor Text="{Binding Url_cover, Mode=TwoWay}"  FontSize="Medium" Margin="0" Grid.Column="1"/>
-                </Grid>
+                    <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand" ColumnDefinitions="200, *">
+                        <Button Text="Upload Cover" Command="{Binding UploadCoverCommand}"/>
+                    </Grid>
 
-                <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand">
+                    <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand">
 
                     <Grid RowDefinitions="Auto" VerticalOptions="EndAndExpand" ColumnDefinitions="200, *" Grid.Column="0">
                         <Label Text="Categories" FontSize="Medium" Grid.Column="0"/>

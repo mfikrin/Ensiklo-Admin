@@ -86,6 +86,7 @@ namespace ENSIKLO_ADMIN.ViewModels
                 && !String.IsNullOrWhiteSpace(url_cover)
                 && !String.IsNullOrWhiteSpace(category)
                 && !String.IsNullOrWhiteSpace(keywords)
+                && !String.IsNullOrWhiteSpace(isbn)
                 ;
             //isbn kalo ga ada gausah diisi gapapa
             //return true;

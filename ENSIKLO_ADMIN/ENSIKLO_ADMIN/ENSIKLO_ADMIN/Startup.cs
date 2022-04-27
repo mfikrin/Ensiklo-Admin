@@ -21,19 +21,19 @@ namespace ENSIKLO_ADMIN
 
             services.AddHttpClient<IBookService, APIBookService>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:5223/api/");
+                client.BaseAddress = new Uri("http://localhost:49067/api/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 
             services.AddHttpClient<ICatService, APICatService>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:5223/api/");
+                client.BaseAddress = new Uri("http://localhost:49067/api/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 
             services.AddHttpClient<IAdminService, APIAdminService>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:5223/api/");
+                client.BaseAddress = new Uri("http://localhost:49067/api/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 

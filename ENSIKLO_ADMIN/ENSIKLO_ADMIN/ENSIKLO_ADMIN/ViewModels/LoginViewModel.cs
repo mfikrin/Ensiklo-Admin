@@ -79,6 +79,7 @@ namespace ENSIKLO_ADMIN.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+                await App.Current.MainPage.DisplayAlert("Login Failed", "Please Check username or password", "OK");
             }
         }
 

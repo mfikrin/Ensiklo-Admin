@@ -106,10 +106,13 @@
   <ItemGroup>
     <Content Include="Assets\account_circle.png" />
     <Content Include="Assets\addBook.png" />
+    <Content Include="Assets\addCat.png" />
     <Content Include="Assets\bookmarks.png" />
     <Content Include="Assets\house_active.png" />
     <Content Include="Assets\local_mall.png" />
     <Content Include="Assets\logo.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />

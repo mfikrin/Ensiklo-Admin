@@ -1,4 +1,5 @@
-﻿using ENSIKLO_ADMIN.Models;
+﻿using Acr.UserDialogs;
+using ENSIKLO_ADMIN.Models;
 using ENSIKLO_ADMIN.Services;
 using ENSIKLO_ADMIN.Views;
 using System;
@@ -6,6 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
+using Windows.UI.Popups;
 using Xamarin.Forms;
 
 namespace ENSIKLO_ADMIN.ViewModels
@@ -36,21 +39,48 @@ namespace ENSIKLO_ADMIN.ViewModels
 
         private readonly IBookService _bookService;
         public Command DeleteBookCommand { get; }
-
         public Command TappedCommand { get; }
+        public Command PublisherTappedCommand { get; }
+        public Command AuthorTappedCommand { get; }
 
+        public UICommandInvokedHandler DeleteBookHandler { get; }
+      
         public BookDetailViewModel(IBookService bookService)
         {
             _bookService = bookService;
 
             DeleteBookCommand = new Command(async bookid => await OnDeleteBook(bookid: BookId));
 
-            //DeleteBookCommand = new Command(async () => await OnDeleteBook());
-
             TappedCommand = new Command(async bookid => await UpdateBookTapped(book_id: int.Parse(BookId)));
+
+            PublisherTappedCommand = new Command(async publishername => await onPublisherTapped(publisher_name: Publisher));
+            AuthorTappedCommand = new Command(async authorname => await onAuthorTapped(author_name: Author));
+
+            DeleteBookHandler = new UICommandInvokedHandler(async (cmd) =>
+            {
+                if (cmd.Label == "Yes")
+                {
+                    await _bookService.DeleteItemAsync(int.Parse(BookId));
+                    await Shell.Current.GoToAsync(nameof(BooksPage));
+                }
+                else
+                {
+                    Debug.WriteLine("No");
+                }
+            });
         }
 
-        
+        private async Task onPublisherTapped(string publisher_name)
+        {
+            //await Shell.Current.GoToAsync(nameof(BooksFromPublisherPage));
+            await Shell.Current.GoToAsync($"{nameof(BooksFromPublisherPage)}?{nameof(BooksFromPublisherViewModel.PublisherName)}={publisher_name}");
+        }
+
+        private async Task onAuthorTapped(string author_name)
+        {
+            await Shell.Current.GoToAsync($"{nameof(BooksFromAuthorPage)}?{nameof(BooksFromAuthorViewModel.AuthorName)}={author_name}");
+        }
+
 
         public int Id { get; set; }
         public string Title
@@ -124,7 +154,7 @@ namespace ENSIKLO_ADMIN.ViewModels
             try
             {
                 var book = await _bookService.GetItemAsync(int.Parse(bookId));
-                Debug.WriteLine("Pass in hereeeeeeeeee");
+                
                 if (bookId != null)
                 {
                     Id = book.Id_book;
@@ -152,21 +182,14 @@ namespace ENSIKLO_ADMIN.ViewModels
         {
             Debug.WriteLine("On delete Book");
             Debug.WriteLine(bookid);
-            //var result = await UserDialogs.Instance.ConfirmAsync("Are you sure to delete this book ?", "Confirm Selection", "Yes", "No");
-
-            //Debug.WriteLine(result);
-            //if (result == 1)
-            //{
-            //    await _bookService.DeleteItemAsync(int.Parse(bookid));
-            //    await Shell.Current.GoToAsync(nameof(BooksPage));
-            //}
-
-            //TODO: Add confirmation Before Delete
 
             try
             {
-                await _bookService.DeleteItemAsync(int.Parse(bookid));
-                await Shell.Current.GoToAsync(nameof(BooksPage));
+               // confirmation before delete message dialog
+                var dialog = new MessageDialog( "Are you sure to delete this book ?", "Confirm Selection");
+                dialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(DeleteBookHandler)));
+                dialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(DeleteBookHandler)));
+                dialog.ShowAsync();        
             }
             catch (Exception ex)
             {
@@ -175,18 +198,7 @@ namespace ENSIKLO_ADMIN.ViewModels
                 Debug.WriteLine(ex.Message);
             }
             
-
-            
-
-
-
         }
-
-        //private async Task OnDeleteBook()
-        //{
-        //    var result = await UserDialogs.Instance.ConfirmAsync("Are you sure to delete this book ?", "Confirm Selection", "Yes", "No");
-        //    Debug.WriteLine(result);
-        //}
 
         private async Task UpdateBookTapped(int book_id)
         {

@@ -14,22 +14,17 @@ namespace ENSIKLO_ADMIN.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        private readonly LoginViewModel _LoginViewModel;
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = Startup.Resolve<LoginViewModel>();
+            _LoginViewModel = Startup.Resolve<LoginViewModel>();
+            BindingContext = _LoginViewModel;
         }
-
-
-        //protected override async void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    var loggedIn = true;
-        //    if (loggedIn)
-        //    {
-        //        Debug.WriteLine("Sudah pernah login in login page");
-        //        await Shell.Current.GoToAsync("//main");
-        //    }
-        //}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _LoginViewModel.OnAppearing();
+        }
     }
 }

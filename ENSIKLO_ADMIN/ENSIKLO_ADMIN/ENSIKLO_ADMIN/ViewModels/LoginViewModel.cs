@@ -93,5 +93,11 @@ namespace ENSIKLO_ADMIN.ViewModels
                && !String.IsNullOrWhiteSpace(password)
                ;
         }
+
+        public void OnAppearing()
+        {
+            Email = "";
+            Password = "";
+        }
     }
 }

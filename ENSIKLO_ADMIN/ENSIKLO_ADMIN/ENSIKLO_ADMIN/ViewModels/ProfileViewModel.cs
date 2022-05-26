@@ -1,4 +1,5 @@
-﻿using ENSIKLO_ADMIN.Services;
+﻿using ENSIKLO_ADMIN.Models;
+using ENSIKLO_ADMIN.Services;
 using ENSIKLO_ADMIN.Views;
 using System;
 using System.Collections.Generic;
@@ -53,18 +54,10 @@ namespace ENSIKLO_ADMIN.ViewModels
         }
         public async void GetData()
         {
-            var user = await _userService.GetCurrentAdmin();
-            //var user = new User
-            //{
-            //    Username = "tes nama",
-            //    Email = "tes email",
-            //    Id = 1,
-            //};
-            email = user.Email;
-            userName = user.Username;
-            id = user.Id;
-            // Debug.WriteLine(email);
-            // Debug.WriteLine(userName);
+            email = CurrentUser.Email;
+            userName = CurrentUser.Username;
+            id = CurrentUser.Id;
+  
             Email = email;
             Name = userName;
         }
